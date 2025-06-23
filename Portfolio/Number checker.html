@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Number checker</title>
+</head>
+<body>
+    <script>
+        function checkEvenOdd(number) {
+            if (number % 2 === 0) {
+                document.write(number + " is even.");
+            } else {
+                document.write(number + " is odd.");
+            }
+        }
+
+        var number = prompt("Enter a number:");
+        checkEvenOdd(parseInt(number));
+    </script>
+</body>
+</html>

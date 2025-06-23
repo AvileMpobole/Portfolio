@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prime Number Checker</title>
+</head>
+<body>
+    <h1> Prime Number Checker</h1>
+    <button type="" onclick="Primenum()">Check</button>
+    <script>
+        function is_prime(num) {
+            if (num <= 1) return false;
+            for (var i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) return false;
+            }
+            return true;
+        }
+
+        function checkPrime() {
+            var num = parseInt(prompt("Enter a number:"));
+            if (is_prime(num)) {
+                alert(num + " is a prime number.");
+            } else {
+                alert(num + " is not a prime number.");
+            }
+        }
+
+        // Call the function to prompt the user and check the number
+        checkPrime();
+    </script>
+</body>
+</html>

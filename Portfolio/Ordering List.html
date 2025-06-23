@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Question 4.2</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 10%;
+        }
+        .container {
+            background-color: rgb(249, 249, 250);
+            padding: 15px;
+            border-radius: 5px;
+            width: 80%;
+        }
+        .input-group {
+            margin-bottom: 10px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .buttons {
+            text-align: right;
+        }
+        .btn {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: medium;
+            cursor: pointer;
+        }
+        .btn-ok {
+            color: rgb(255, 255, 255);
+            background-color: rgb(18, 56, 161);
+        }
+        .btn-cancel {
+            color: rgb(18, 56, 161);
+            background-color: rgb(244, 245, 247);
+            border: 1px solid rgb(0, 140, 255);
+        }
+        .result {
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="input-group">
+            <label for="age">Age:</label>
+            <input type="number" id="age">
+        </div>
+        <div class="input-group">
+            <label for="nickname">Nickname:</label>
+            <input type="text" id="nickname">
+        </div>
+        <div class="input-group">
+            <label for="favoriteColor">Favorite Color:</label>
+            <input type="text" id="favoriteColor">
+        </div>
+        <div class="input-group">
+            <label for="height">Height:</label>
+            <input type="text" id="height">
+        </div>
+        <div class="input-group">
+            <label for="bloodType">Blood Type:</label>
+            <input type="text" id="bloodType">
+        </div>
+        <div class="input-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name">
+        </div>
+        <div class="input-group">
+            <label for="surname">Surname:</label>
+            <input type="text" id="surname">
+        </div>
+        <div class="input-group">
+            <label for="dateOfBirth">Date of Birth:</label>
+            <input type="date" id="dateOfBirth">
+        </div>
+        <div class="input-group">
+            <label for="gender">Gender:</label>
+            <input type="text" id="gender">
+        </div>
+        <div class="input-group">
+            <label for="idNumber">ID Number:</label>
+            <input type="text" id="idNumber">
+        </div>
+        <div class="buttons">
+            <button class="btn btn-ok" onclick="gatherUserInfo()">Submit</button>
+            <button class="btn btn-cancel" onclick="clearForm()">Clear</button>
+        </div>
+        <div class="result" id="result"></div>
+    </div>
+    <script>
+        function gatherUserInfo() {
+            var age = document.getElementById("age").value;
+            var nickname = document.getElementById("nickname").value;
+            var favoriteColor = document.getElementById("favoriteColor").value;
+            var height = document.getElementById("height").value;
+            var bloodType = document.getElementById("bloodType").value;
+            var name = document.getElementById("name").value;
+            var surname = document.getElementById("surname").value;
+            var dateOfBirth = document.getElementById("dateOfBirth").value;
+            var gender = document.getElementById("gender").value;
+            var idNumber = document.getElementById("idNumber").value;
+
+            var ageIn20Years = parseInt(age) + 20;
+            var greetings = 
+                "Hello, " + nickname + "! (" + name + " " + surname + ")<br>" +
+                "Molo, " + nickname + "! (" + name + " " + surname + ")<br>" +
+                "Dumela, " + nickname + "! (" + name + " " + surname + ")<br>" +
+                "You will be " + ageIn20Years + " years old in 20 years.<br>";
+
+            var num1 = parseFloat(prompt("Enter the first number:"));
+            var num2 = parseFloat(prompt("Enter the second number:"));
+            var num3 = parseFloat(prompt("Enter the third number:"));
+            var num4 = parseFloat(prompt("Enter the fourth number:"));
+
+            var sum = num1 + num2 + num3 + num4;
+            var average = sum / 4;
+
+            var resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = greetings + 
+                "The sum of the four numbers is: " + sum + "<br>" +
+                "The average of the four numbers is: " + average;
+            resultDiv.style.display = "block";
+        }
+
+        function clearForm() {
+            document.getElementById("age").value = "";
+            document.getElementById("nickname").value = "";
+            document.getElementById("favoriteColor").value = "";
+            document.getElementById("height").value = "";
+            document.getElementById("bloodType").value = "";
+            document.getElementById("name").value = "";
+            document.getElementById("surname").value = "";
+            document.getElementById("dateOfBirth").value = "";
+            document.getElementById("gender").value = "";
+            document.getElementById("idNumber").value = "";
+            document.getElementById("result").style.display = "none";
+        }
+    </script>
+</body>
+</html>

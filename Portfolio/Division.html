@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Division Calculator</title>
+</head>
+<body>
+    <h1>Division Calculator</h1>
+    <p>Click the button to enter TWO numbers for division:</p>
+    <div>
+        <button type="button" onclick="divideNumbers()">Divide</button>
+    </div>
+
+    <script>
+        function divideNumbers() {
+            try {
+                var num1 = parseFloat(prompt("Enter the first number:"));
+                var num2 = parseFloat(prompt("Enter the second number:"));
+
+                if (isNaN(num1) || isNaN(num2)) {
+                    throw new Error("Invalid input. Please enter valid numbers.");
+                }
+
+                if (num2 === 0) {
+                    throw new Error("Division by zero is not allowed. Please enter a non-zero second number.");
+                }
+
+                var result = num1 / num2;
+                alert("The result of dividing " + num1 + " by " + num2 + " is " + result);
+            } catch (error) {
+                alert(error.message);
+            }
+        }
+    </script>
+</body>
+</html>

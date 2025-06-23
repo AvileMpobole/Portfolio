@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Countdown Timer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #e3f2fd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    main {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      text-align: center;
+      width: 300px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    input, button {
+      margin: 1rem 0;
+      padding: 0.6rem;
+      width: 100%;
+    }
+
+    #timer {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>⏳ Countdown Timer</h1>
+    <input type="datetime-local" id="datetime" />
+    <button onclick="startCountdown()">Start Countdown</button>
+    
+    <div id="countdown" class="hidden">
+      <h2>Time Remaining</h2>
+      <p id="timer">00d 00h 00m 00s</p>
+    </div>
+  </main>
+  <script>
+    let countdownInterval;
+
+    function startCountdown() {
+      clearInterval(countdownInterval); // reset if running
+
+      const input = document.getElementById("datetime").value;
+      const targetDate = new Date(input).getTime();
+
+      if (!input || isNaN(targetDate)) {
+        alert("Please select a valid date and time.");
+        return;
+      }
+
+      document.getElementById("countdown").classList.remove("hidden");
+
+      countdownInterval = setInterval(() => {
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+
+        if (diff <= 0) {
+          clearInterval(countdownInterval);
+          document.getElementById("timer").textContent = "00d 00h 00m 00s";
+          alert("Countdown finished!");
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById("timer").textContent =
+          `${String(days).padStart(2, '0')}d ` +
+          `${String(hours).padStart(2, '0')}h ` +
+          `${String(minutes).padStart(2, '0')}m ` +
+          `${String(seconds).padStart(2, '0')}s`;
+      }, 1000);
+
+      // Immediately update timer on start
+      setTimeout(() => {
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+        if (diff > 0) {
+          const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+          document.getElementById("timer").textContent =
+            `${String(days).padStart(2, '0')}d ` +
+            `${String(hours).padStart(2, '0')}h ` +
+            `${String(minutes).padStart(2, '0')}m ` +
+            `${String(seconds).padStart(2, '0')}s`;}
+      }, 0);
+    }
+  </script>
+</body>
+</html>

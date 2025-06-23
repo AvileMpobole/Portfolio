@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title> Bumble's family 25th Anniversary Invitation</title>
+        <style>
+            body{
+                font-family: Arial, Helvetica, sans-serif;
+            margin: 40px;
+            background-color: rgb(251, 255, 240);
+
+            
+            
+            }
+            input{
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;}
+
+            button {
+                width: 100%;
+                  padding: 10px;
+                  background-color: #d63a13;
+                      color: white;
+                      border: none;
+                      border-radius: 4px;
+                      cursor: pointer;
+                    }
+
+            
+            select{
+                width:80% ;
+                padding: 10px;
+                margin: 10px 0;
+            }
+
+            #rsvp-form{
+                background-color: azure;
+                padding: 15px;
+                border: 5px;
+            }
+
+            #confetti{
+                position: absolute;
+                top: 0;
+                left: auto;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1 align="center"> Bumble's family 25th Anniversary Invitation</h1>
+        <div style="text-align: left;">
+            <label for="name"> Full Name:</label>
+            <input id="fullname" placeholder="Please enter your full name">
+        </div>
+        <div>
+            <label for="number">Phone Number:</label>
+            <input type="number" id="phoneNumber" placeholder="Please enter your phone number">
+        </div>
+        <div>
+            <label for="email">Email Adress:</label>
+            <input type="email" id="emailAdress" placeholder="please enter email adress">
+        </div>
+        <div>
+            <label for="attendees">Number of Attendees</label>
+            <input type="number" id="attendees" placeholder="How many attendees">
+        </div>
+        <div>
+            <label for="time"> Arrival Time:</label>
+            <input type="datetime" id="Arrival" placeholder="Enter Time">
+
+        </div>
+        <div>
+            <label for="menu">Menu Preference:</label>
+            <select id="menu" name="menu">
+                <option value="Vegan"> Vegan</option>
+                <option value="Nonvegan"> Non Vegan</option> 
+                <option value="other">Other</option>
+
+            </select>
+        </div>
+        <div>
+            <label for="table"> Select Table Option:</label>
+            <select id="table" name="tables">
+                <option value="table 1">Table 1</option>
+                <option value="table 2">Table 2</option>
+                <option value="table 3">Table 3</option>
+                <option value="table 4">Table 4</option>
+            </select>
+        </div>
+        <div>
+            <button type="submit"> submit</button>
+        </div>
+        <div id="rsvp">
+            <h2 align="center"> Thank you for your RSVP.Here is your Confirmation Card.</h2>
+            <div id="confetti"></div>
+            <div id="userDetials"></div>
+            <img src="mr_bumble.jpg">
+
+        </div>
+
+        <script>
+            document.querySelector('button[type="submit"]').addEventListener('click', function(event) {
+    event.preventDefault();
+
+    
+    const fullName = document.getElementById('fullname').value;
+    const phoneNumber = document.getElementById('phoneNumber').value;
+    const emailAdress = document.getElementById('emailAdress').value;
+    const attendees = document.getElementById('attendees').value;
+    const arrivalTime = document.getElementById('Arrival').value;
+    const menuPreference = document.getElementById('menu').value;
+    const tableOption = document.getElementById('table').value;
+
+    
+    localStorage.setItem('fullName', fullName);
+    localStorage.setItem('phoneNumber', phoneNumber);
+    localStorage.setItem('emailAdress', emailAdress);
+    localStorage.setItem('attendees', attendees);
+    localStorage.setItem('arrivalTime', arrivalTime);
+    localStorage.setItem('menuPreference', menuPreference);
+    localStorage.setItem('tableOption', tableOption);
+
+    
+    document.getElementById('rsvp').style.display = 'block';
+    document.getElementById('userDetials').innerHTML = `
+        <p>Full Name: ${fullName}</p>
+        <p>Phone Number: ${phoneNumber}</p>
+        <p>Email Address: ${emailAdress}</p>
+        <p>Number of Attendees: ${attendees}</p>
+        <p>Arrival Time: ${arrivalTime}</p>
+        <p>Menu Preference: ${menuPreference}</p>
+        <p>Table Option: ${tableOption}</p>
+    `;
+
+    
+    startConfetti();
+});
+
+function startConfetti() {
+    const confetti = document.getElementById('confetti');
+    confetti.innerHTML = '';
+    for (let i = 0; i < 100; i++) {
+        const div = document.createElement('div');
+        div.className = 'confetti-piece';
+        confetti.appendChild(div);
+    }
+    animateConfetti();
+}
+
+function animateConfetti() {
+    const confettiPieces = document.querySelectorAll('.confetti-piece');
+    confettiPieces.forEach(piece => {
+        piece.style.left = `${Math.random() * 100}%`;
+        piece.style.animationDuration = `${Math.random() * 3 + 2}s`;
+        piece.style.animationDelay = `${Math.random() * 5}s`;
+    });
+}
+
+        </script>
+        
+
+        
+    </body>
+</html>

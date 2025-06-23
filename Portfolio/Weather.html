@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Weather by Location</title>
+  <style>
+    body {
+  font-family: sans-serif;
+  background: #e0f7fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+main {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+select, button {
+  margin: 1rem 0;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.hidden {
+  display: none;
+}
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Weather at Your Location</h1>
+    <button onclick="getLocation()">Get My Weather</button>
+
+    <div id="result" class="hidden">
+      <h2 id="location">Your Location</h2>
+      <p><strong>Temperature:</strong> <span id="temp"></span>°C</p>
+    </div>
+  </main>
+  <script>
+        function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showWeather, showError);
+  } else {
+    alert("Geolocation is not supported by your browser.");
+  }
+}
+
+async function showWeather(position) {
+  const lat = position.coords.latitude;
+  const lon = position.coords.longitude;
+
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weathercode&timezone=auto`;
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    const temp = data.current.temperature_2m;
+
+    document.getElementById("temp").textContent = temp.toFixed(1);
+    document.getElementById("result").classList.remove("hidden");
+  } catch (error) {
+    alert("Could not fetch weather data.");
+  }
+}
+
+function showError() {
+  alert("We couldn't access your location. Please enable GPS or location permissions.");
+}
+  </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Task Tracker</title>
+  <style>
+    body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f0f0f0;
+  margin: 0;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+main {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+input {
+  flex: 1;
+  padding: 0.5rem;
+}
+
+button {
+  padding: 0.5rem 1rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+li {
+  background: #e0f7fa;
+  padding: 0.5rem;
+  margin: 0.3rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Task Tracker</h1>
+    <form id="taskForm">
+      <input type="text" id="taskInput" placeholder="Enter a new task" required />
+      <button type="submit">Add Task</button>
+    </form>
+    <ul id="taskList"></ul>
+  </main>
+    <script>
+        document.getElementById('taskForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const taskInput = document.getElementById('taskInput');
+        const taskText = taskInput.value.trim();
+        if (taskText) {
+            const li = document.createElement('li');
+            li.textContent = taskText;
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.onclick = function() {
+            li.remove();
+            };
+            li.appendChild(deleteButton);
+            document.getElementById('taskList').appendChild(li);
+            taskInput.value = '';
+        }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Exchange Rate calulator</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 40px;
+            background-color:lightblue ;
+        }
+        h1{
+            text-align:left;
+        }
+        table{
+            margin: 15% auto;
+            border-collapse: collapse;
+            width: auto;
+            border: 2px solid black;
+            background-color: rgb(142, 186, 228);
+        }
+        th{
+            padding: 10px;
+            text-align: center;
+            
+        }
+       
+            
+        td{
+            padding: 10px;
+            text-align: center;
+            border: 1px;
+            background-color: aliceblue;
+        }
+        input[type= "number"]{
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button{
+            display: block;
+            margin: 15px auto;
+            padding: 10px 20px;
+            font-size: medium;
+            color: rgb(241, 247, 248);
+            background-color: rgb(101, 176, 241);
+            cursor: pointer;
+        
+        }
+       
+    </style>
+    </head>
+    <body>
+       <h1>Exchange Rate Calculator </h1> 
+       <div style="text-align: left;" >
+       <label for="amount"> Please Enter The Amount You Want to Exchange in ZAR:</label>
+       <input type="number" id="amount" placeholder="Please Enter amount in ZAR" required>
+       <button oneclick="convertCurrency()" > Convert Currency to ZAR</button>
+    
+       </div>
+
+       <table>
+        <thead>
+            <tr>
+                <th> Currency</th>
+                <th> Today's Exchange Rate</th>
+                <th> Amount you will receive in ZAR Currency</th>
+            </tr>
+        </thead>
+        <tbody id ="exchangeTable"></tbody>  
+       </table>
+      
+       <script>
+        const rates = {
+            USD: 18.24,
+            EUR: 19.89,
+            GBP: 23.60,
+            JPY: 0.12,
+            AUD: 12.22,
+            CAD: 13.31,
+            CHF: 20.56,
+            CNY: 2.51,
+            INR: 0.22,
+            BRL: 3.37,
+        };
+
+        function convertCurrency() {
+            const amount = document.getElementById('amount').value;
+            const tableBody= document.getElementById( 'exchangeTable');
+            tableBody.innerHTML= '';
+            
+            for (const [currency, rate] of Object.entries(rates)) {
+                const convertedAmount = (amount * rate).toFixed(2);
+                const row = `<tr>
+                                <td>${currency}</td>
+                                <td>${rate}</td>
+                                <td>${convertedAmount}</td>
+                             </tr>`;
+                tableBody.innerHTML += row; }
+           
+           
+                            
+        }
+       </script>
+    </body>
+</html>
